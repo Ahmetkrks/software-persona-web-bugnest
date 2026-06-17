@@ -8,8 +8,10 @@ const formatDate = (dateValue) =>
   }).format(new Date(dateValue));
 
 function IssueCard({ issue, onEdit, onDelete, onStatusChange }) {
+  const priorityClass = issue.priority.toLowerCase();
+
   return (
-    <article className="issue-card">
+    <article className={`issue-card issue-card--${priorityClass}`}>
       <div className="issue-card__header">
         <div>
           <span className="type-label">{issue.type}</span>
@@ -22,8 +24,8 @@ function IssueCard({ issue, onEdit, onDelete, onStatusChange }) {
 
       <div className="issue-card__meta">
         <span>Assigned: {issue.assignedTo}</span>
-        <span>Created: {formatDate(issue.createdAt)}</span>
-        <span>Updated: {formatDate(issue.updatedAt)}</span>
+        <span>Created {formatDate(issue.createdAt)}</span>
+        <span>Updated {formatDate(issue.updatedAt)}</span>
       </div>
 
       <div className="issue-card__footer">

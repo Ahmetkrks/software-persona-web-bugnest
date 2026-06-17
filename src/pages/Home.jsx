@@ -42,6 +42,7 @@ function Home() {
     resolved: issues.filter((issue) => issue.status === 'Resolved').length,
     critical: issues.filter((issue) => issue.priority === 'Critical').length
   };
+  const resultCountText = `${filteredIssues.length} ${filteredIssues.length === 1 ? 'record' : 'records'}`;
 
   const handleSubmitIssue = (event) => {
     event.preventDefault();
@@ -114,36 +115,53 @@ function Home() {
           <p className="eyebrow">Mini issue tracker</p>
           <h1>Track software feedback without the overhead.</h1>
         </div>
+        <div className="dashboard__signal" aria-label="Current result count">
+          <span>{resultCountText}</span>
+          <strong>in view</strong>
+        </div>
       </section>
 
-      <StatsPanel stats={stats} />
-
-      <FilterBar filters={filters} setFilters={setFilters} onClearFilters={() => setFilters(initialFilters)} />
+      <section className="control-deck">
+        <StatsPanel stats={stats} />
+        <FilterBar filters={filters} setFilters={setFilters} onClearFilters={() => setFilters(initialFilters)} />
+      </section>
 
       <section className="dashboard__layout">
-        <IssueForm
-          formData={formData}
-          setFormData={setFormData}
-          onSubmit={handleSubmitIssue}
-          onCancel={handleCancelEdit}
-          isEditing={Boolean(selectedIssue)}
-        />
+        <aside className="compose-panel">
+          <IssueForm
+            formData={formData}
+            setFormData={setFormData}
+            onSubmit={handleSubmitIssue}
+            onCancel={handleCancelEdit}
+            isEditing={Boolean(selectedIssue)}
+          />
+        </aside>
 
-        <div className="issue-list">
-          {filteredIssues.length === 0 ? (
-            <EmptyState />
-          ) : (
-            filteredIssues.map((issue) => (
-              <IssueCard
-                key={issue.id}
-                issue={issue}
-                onEdit={handleEditIssue}
-                onDelete={handleDeleteIssue}
-                onStatusChange={handleStatusChange}
-              />
-            ))
-          )}
-        </div>
+        <section className="workbench">
+          <div className="workbench__header">
+            <div>
+              <p className="eyebrow">Issue queue</p>
+              <h2>Records that need attention</h2>
+            </div>
+            <span className="workbench__count">{resultCountText}</span>
+          </div>
+
+          <div className="issue-list">
+            {filteredIssues.length === 0 ? (
+              <EmptyState />
+            ) : (
+              filteredIssues.map((issue) => (
+                <IssueCard
+                  key={issue.id}
+                  issue={issue}
+                  onEdit={handleEditIssue}
+                  onDelete={handleDeleteIssue}
+                  onStatusChange={handleStatusChange}
+                />
+              ))
+            )}
+          </div>
+        </section>
       </section>
     </main>
   );

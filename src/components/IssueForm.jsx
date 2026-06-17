@@ -8,8 +8,11 @@ function IssueForm({ formData, setFormData, onSubmit, onCancel, isEditing }) {
   return (
     <form className="issue-form" onSubmit={onSubmit}>
       <div className="section-heading">
-        <p className="eyebrow">{isEditing ? 'Edit record' : 'New record'}</p>
-        <h2>{isEditing ? 'Update Issue' : 'Add Issue'}</h2>
+        <span className="section-heading__mark">{isEditing ? 'UP' : 'IN'}</span>
+        <div>
+          <p className="eyebrow">{isEditing ? 'Edit record' : 'New record'}</p>
+          <h2>{isEditing ? 'Update Issue' : 'Add Issue'}</h2>
+        </div>
       </div>
 
       <label>
