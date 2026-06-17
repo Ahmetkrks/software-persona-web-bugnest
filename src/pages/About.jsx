@@ -1,31 +1,22 @@
-function About() {
+function About({ t }) {
   return (
     <main className="about-page">
       <section className="about-panel">
-        <p className="eyebrow">About BugNest</p>
-        <h1>A compact internship project for tracking software issues.</h1>
-        <p>
-          BugNest is a mini issue, bug, and feedback tracking app built to demonstrate practical React state
-          management, reusable components, LocalStorage persistence, and a clean dashboard interface without a
-          backend.
-        </p>
+        <p className="eyebrow">{t.about.eyebrow}</p>
+        <h1>{t.about.title}</h1>
+        <p>{t.about.description}</p>
 
         <div className="about-grid">
           <div>
-            <h2>Purpose</h2>
-            <p>
-              The app helps teams record project feedback, update progress, filter records, and understand the
-              current workload through simple statistics.
-            </p>
+            <h2>{t.about.purposeTitle}</h2>
+            <p>{t.about.purpose}</p>
           </div>
           <div>
-            <h2>Technologies</h2>
+            <h2>{t.about.technologiesTitle}</h2>
             <ul>
-              <li>React + Vite</li>
-              <li>JavaScript functional components</li>
-              <li>Pure CSS responsive design</li>
-              <li>LocalStorage persistence</li>
-              <li>Netlify-ready static build</li>
+              {t.about.technologies.map((technology) => (
+                <li key={technology}>{technology}</li>
+              ))}
             </ul>
           </div>
         </div>

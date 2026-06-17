@@ -1,6 +1,6 @@
 import { issueStatuses, issueTypes } from '../interfaces/issueModel.js';
 
-function FilterBar({ filters, setFilters, onClearFilters }) {
+function FilterBar({ filters, setFilters, onClearFilters, t }) {
   const updateFilter = (field, value) => {
     setFilters((currentFilters) => ({ ...currentFilters, [field]: value }));
   };
@@ -8,41 +8,41 @@ function FilterBar({ filters, setFilters, onClearFilters }) {
   return (
     <section className="filter-bar">
       <label className="filter-bar__search">
-        <span>Search</span>
+        <span>{t.filters.search}</span>
         <input
           type="search"
           value={filters.search}
           onChange={(event) => updateFilter('search', event.target.value)}
-          placeholder="Search title or description"
+          placeholder={t.filters.searchPlaceholder}
         />
       </label>
 
       <label>
-        <span>Status</span>
+        <span>{t.filters.status}</span>
         <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)}>
-          <option value="All">All statuses</option>
+          <option value="All">{t.filters.allStatuses}</option>
           {issueStatuses.map((status) => (
             <option key={status} value={status}>
-              {status}
+              {t.options[status]}
             </option>
           ))}
         </select>
       </label>
 
       <label>
-        <span>Type</span>
+        <span>{t.filters.type}</span>
         <select value={filters.type} onChange={(event) => updateFilter('type', event.target.value)}>
-          <option value="All">All types</option>
+          <option value="All">{t.filters.allTypes}</option>
           {issueTypes.map((type) => (
             <option key={type} value={type}>
-              {type}
+              {t.options[type]}
             </option>
           ))}
         </select>
       </label>
 
       <button className="button button--ghost" type="button" onClick={onClearFilters}>
-        Clear Filters
+        {t.filters.clear}
       </button>
     </section>
   );

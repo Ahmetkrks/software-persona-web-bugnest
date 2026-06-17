@@ -161,6 +161,39 @@ button {
   gap: 8px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-switch {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface-muted);
+  padding: 3px;
+}
+
+.language-switch__button {
+  min-height: 30px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--label);
+  padding: 0 9px;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.language-switch__button--active {
+  background: var(--surface);
+  color: var(--accent-strong);
+  box-shadow: var(--shadow-soft);
+}
+
 .nav-link {
   min-height: 38px;
   border: 1px solid transparent;
@@ -778,6 +811,15 @@ textarea:focus {
   .site-nav {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .language-switch {
+    width: 100%;
   }
 
   .theme-toggle {

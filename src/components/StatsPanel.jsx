@@ -6,12 +6,12 @@ const statItems = [
   { label: 'Critical', key: 'critical', tone: 'critical' }
 ];
 
-function StatsPanel({ stats }) {
+function StatsPanel({ stats, t }) {
   return (
-    <section className="stats-panel" aria-label="Issue statistics">
+    <section className="stats-panel" aria-label={t.home.statsLabel}>
       {statItems.map((item) => (
         <div className={`stat-card stat-card--${item.tone}`} key={item.key}>
-          <span>{item.label}</span>
+          <span>{t.stats[item.key]}</span>
           <strong>{stats[item.key]}</strong>
         </div>
       ))}

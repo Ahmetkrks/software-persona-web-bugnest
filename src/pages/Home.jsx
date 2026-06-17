@@ -13,7 +13,7 @@ const initialFilters = {
   search: ''
 };
 
-function Home() {
+function Home({ t }) {
   const [issues, setIssues] = useState(() => loadIssues(sampleIssues));
   const [formData, setFormData] = useState(emptyIssueForm);
   const [editingIssueId, setEditingIssueId] = useState(null);
@@ -42,7 +42,9 @@ function Home() {
     resolved: issues.filter((issue) => issue.status === 'Resolved').length,
     critical: issues.filter((issue) => issue.priority === 'Critical').length
   };
-  const resultCountText = `${filteredIssues.length} ${filteredIssues.length === 1 ? 'record' : 'records'}`;
+  const resultCountText = `${filteredIssues.length} ${
+    filteredIssues.length === 1 ? t.common.record : t.common.records
+  }`;
 
   const handleSubmitIssue = (event) => {
     event.preventDefault();
@@ -112,18 +114,18 @@ function Home() {
     <main className="dashboard">
       <section className="dashboard__intro">
         <div>
-          <p className="eyebrow">Mini issue tracker</p>
-          <h1>Track software feedback without the overhead.</h1>
+          <p className="eyebrow">{t.home.eyebrow}</p>
+          <h1>{t.home.title}</h1>
         </div>
-        <div className="dashboard__signal" aria-label="Current result count">
+        <div className="dashboard__signal" aria-label={t.home.resultLabel}>
           <span>{resultCountText}</span>
-          <strong>in view</strong>
+          <strong>{t.common.inView}</strong>
         </div>
       </section>
 
       <section className="control-deck">
-        <StatsPanel stats={stats} />
-        <FilterBar filters={filters} setFilters={setFilters} onClearFilters={() => setFilters(initialFilters)} />
+        <StatsPanel stats={stats} t={t} />
+        <FilterBar filters={filters} setFilters={setFilters} onClearFilters={() => setFilters(initialFilters)} t={t} />
       </section>
 
       <section className="dashboard__layout">
@@ -134,21 +136,22 @@ function Home() {
             onSubmit={handleSubmitIssue}
             onCancel={handleCancelEdit}
             isEditing={Boolean(selectedIssue)}
+            t={t}
           />
         </aside>
 
         <section className="workbench">
           <div className="workbench__header">
             <div>
-              <p className="eyebrow">Issue queue</p>
-              <h2>Records that need attention</h2>
+              <p className="eyebrow">{t.home.queueEyebrow}</p>
+              <h2>{t.home.queueTitle}</h2>
             </div>
             <span className="workbench__count">{resultCountText}</span>
           </div>
 
           <div className="issue-list">
             {filteredIssues.length === 0 ? (
-              <EmptyState />
+              <EmptyState title={t.empty.title} message={t.empty.message} />
             ) : (
               filteredIssues.map((issue) => (
                 <IssueCard
@@ -157,6 +160,7 @@ function Home() {
                   onEdit={handleEditIssue}
                   onDelete={handleDeleteIssue}
                   onStatusChange={handleStatusChange}
+                  t={t}
                 />
               ))
             )}
