@@ -1,36 +1,49 @@
-# BugNest
+# BugNest - Mini Hata ve Geri Bildirim Takip Uygulaması
 
-BugNest, yazılım projeleri için hazırlanmış mini bir issue, bug ve geri bildirim takip uygulamasıdır. Kullanıcı; kayıt oluşturabilir, issue kartlarını listeleyebilir, mevcut kayıtları güncelleyebilir, silebilir ve durum takibi yapabilir.
+BugNest, yazılım projelerinde hata, geliştirme isteği ve geri bildirim kayıtlarını takip etmek için geliştirilmiş basit bir React uygulamasıdır. Web Development / JavaScript staj projesi olarak hazırlanmıştır ve React ile temel CRUD işlemlerinin nasıl uygulanacağını gösterir.
 
-## Teknolojiler
+Uygulama backend, API veya kimlik doğrulama kullanmaz. Veriler tarayıcıdaki LocalStorage alanında saklanır.
 
-- React + Vite
+## Kullanılan Teknolojiler
+
+- React
+- Vite
 - JavaScript
 - Pure CSS
 - LocalStorage
-- Netlify uyumlu statik build
 
 ## Özellikler
 
-- Issue ekleme
-- Issue listeleme
-- Issue düzenleme
-- Issue silme
-- Durum değiştirme
-- Status ve type filtreleme
-- Başlık/açıklama üzerinden arama
-- Toplam, open, in review, resolved ve critical istatistikleri
-- LocalStorage ile kalıcı veri saklama
-- Boş sonuç durumunda EmptyState gösterimi
+- Hata kaydı ekleme
+- Hata kayıtlarını listeleme
+- Hata kaydı güncelleme
+- Hata kaydı silme
+- Durum ve tür bazlı filtreleme
+- Başlık ve açıklama içinde arama
+- Temel istatistikleri gösterme
+- Verileri LocalStorage içinde saklama
+- Açık / koyu tema seçimi
+- Türkçe / İngilizce dil seçimi
 
-## CRUD Açıklaması
+## CRUD İşlemleri
 
-- Create: Form üzerinden yeni issue oluşturulur ve listeye eklenir.
-- Read: LocalStorage'dan gelen veya örnek olarak üretilen issue kayıtları kart olarak listelenir.
-- Update: Edit butonu ile form aynı kaydı düzenleme modunda açar ve Update Issue ile kayıt güncellenir.
-- Delete: Delete butonu ilgili issue kaydını listeden ve LocalStorage'dan kaldırır.
+### Create / Ekleme
 
-## Klasör Yapısı
+Kullanıcı form üzerinden yeni bir hata kaydı oluşturabilir. Başlık, açıklama, tür, öncelik, durum ve atanan kişi bilgileri kaydedilir.
+
+### Read / Listeleme
+
+Kayıtlar kart yapısında listelenir. LocalStorage boşsa uygulama örnek kayıtlarla başlar.
+
+### Update / Güncelleme
+
+Kullanıcı mevcut bir kaydı düzenleme modunda açabilir ve bilgilerini güncelleyebilir. Ayrıca kayıt durumu doğrudan kart üzerinden değiştirilebilir.
+
+### Delete / Silme
+
+Kullanıcı istediği hata kaydını silebilir. Silinen kayıt LocalStorage içinden de kaldırılır.
+
+## Proje Klasör Yapısı
 
 ```text
 src/
@@ -41,16 +54,17 @@ src/
     IssueCard.jsx
     IssueForm.jsx
     StatsPanel.jsx
-  interfaces/
-    issueModel.js
   pages/
     About.jsx
     Home.jsx
+  interfaces/
+    issueModel.js
   utils/
     localStorage.js
+    translations.js
   App.jsx
-  index.css
   main.jsx
+  index.css
 ```
 
 ## Kurulum
@@ -60,19 +74,36 @@ npm install
 npm run dev
 ```
 
-Build almak için:
+Uygulama varsayılan olarak Vite geliştirme sunucusunda çalışır:
+
+```text
+http://localhost:5173
+```
+
+## Production Build
 
 ```bash
 npm run build
 ```
 
-## Netlify Deployment Notu
+Build çıktısı `dist` klasöründe oluşturulur.
 
-Netlify üzerinde build command olarak `npm run build`, publish directory olarak `dist` seçilmelidir. Proje backend veya API kullanmadığı için statik olarak yayınlanabilir.
+## Deployment Notu
+
+Bu proje statik bir React + Vite uygulamasıdır. Netlify, Vercel veya benzer statik hosting servislerine kolayca deploy edilebilir.
+
+Netlify için:
+
+- Build command: `npm run build`
+- Publish directory: `dist`
 
 ## Ekran Görüntüsü
 
-![BugNest ekran goruntusu](./screenshot-placeholder.png)
+Proje ekran görüntüsü bu alana eklenebilir.
+
+## GitHub Repository
+
+Repository bağlantısı bu alana eklenebilir.
 
 ## Yazar
 
