@@ -100,11 +100,3 @@ Netlify için:
 ## Ekran Görüntüsü
 
 Proje ekran görüntüsü bu alana eklenebilir.
-
-## GitHub Repository
-
-Repository bağlantısı bu alana eklenebilir.
-
-## Yazar
-
-Ahmet Karaköse
