@@ -1,4 +1,4 @@
-function Header({ activePage, setActivePage }) {
+function Header({ activePage, setActivePage, theme, onToggleTheme }) {
   return (
     <header className="site-header">
       <button className="brand" type="button" onClick={() => setActivePage('home')}>
@@ -22,6 +22,10 @@ function Header({ activePage, setActivePage }) {
           About
         </button>
       </nav>
+
+      <button className="theme-toggle" type="button" onClick={onToggleTheme} aria-pressed={theme === 'dark'}>
+        {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+      </button>
     </header>
   );
 }
