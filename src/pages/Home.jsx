@@ -1,20 +1,47 @@
 import { useEffect, useState } from 'react';
 import EmptyState from '../components/EmptyState.jsx';
+import FilterBar from '../components/FilterBar.jsx';
 import IssueCard from '../components/IssueCard.jsx';
 import IssueForm from '../components/IssueForm.jsx';
+import StatsPanel from '../components/StatsPanel.jsx';
 import { createIssue, emptyIssueForm, sampleIssues } from '../interfaces/issueModel.js';
 import { loadIssues, saveIssues } from '../utils/localStorage.js';
+
+const initialFilters = {
+  status: 'All',
+  type: 'All',
+  search: ''
+};
 
 function Home() {
   const [issues, setIssues] = useState(() => loadIssues(sampleIssues));
   const [formData, setFormData] = useState(emptyIssueForm);
   const [editingIssueId, setEditingIssueId] = useState(null);
+  const [filters, setFilters] = useState(initialFilters);
 
   useEffect(() => {
     saveIssues(issues);
   }, [issues]);
 
   const selectedIssue = issues.find((issue) => issue.id === editingIssueId);
+  const searchTerm = filters.search.trim().toLowerCase();
+  const filteredIssues = issues.filter((issue) => {
+    const matchesStatus = filters.status === 'All' || issue.status === filters.status;
+    const matchesType = filters.type === 'All' || issue.type === filters.type;
+    const matchesSearch =
+      !searchTerm ||
+      issue.title.toLowerCase().includes(searchTerm) ||
+      issue.description.toLowerCase().includes(searchTerm);
+
+    return matchesStatus && matchesType && matchesSearch;
+  });
+  const stats = {
+    total: issues.length,
+    open: issues.filter((issue) => issue.status === 'Open').length,
+    inReview: issues.filter((issue) => issue.status === 'In Review').length,
+    resolved: issues.filter((issue) => issue.status === 'Resolved').length,
+    critical: issues.filter((issue) => issue.priority === 'Critical').length
+  };
 
   const handleSubmitIssue = (event) => {
     event.preventDefault();
@@ -89,6 +116,10 @@ function Home() {
         </div>
       </section>
 
+      <StatsPanel stats={stats} />
+
+      <FilterBar filters={filters} setFilters={setFilters} onClearFilters={() => setFilters(initialFilters)} />
+
       <section className="dashboard__layout">
         <IssueForm
           formData={formData}
@@ -99,10 +130,10 @@ function Home() {
         />
 
         <div className="issue-list">
-          {issues.length === 0 ? (
-            <EmptyState title="No issues yet" message="Add the first issue to start tracking project work." />
+          {filteredIssues.length === 0 ? (
+            <EmptyState />
           ) : (
-            issues.map((issue) => (
+            filteredIssues.map((issue) => (
               <IssueCard
                 key={issue.id}
                 issue={issue}
