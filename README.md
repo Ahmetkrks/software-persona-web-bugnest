@@ -88,15 +88,12 @@ npm run build
 
 Build çıktısı `dist` klasöründe oluşturulur.
 
-## Deployment Notu
 
-Bu proje statik bir React + Vite uygulamasıdır. Netlify, Vercel veya benzer statik hosting servislerine kolayca deploy edilebilir.
-
-Netlify için:
-
-- Build command: `npm run build`
-- Publish directory: `dist`
 
 ## Ekran Görüntüsü
 
-Proje ekran görüntüsü bu alana eklenebilir.
+<img width="1291" height="906" alt="image" src="https://github.com/user-attachments/assets/7e49b0af-3495-4d5f-979d-10253b4ba450" />
+
+<img width="1352" height="909" alt="BugNest-Lightmode" src="https://github.com/user-attachments/assets/887fff6c-91c0-432d-9b41-6d3bc46b9e44" />
+
+
